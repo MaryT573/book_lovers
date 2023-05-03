@@ -20,10 +20,8 @@ ActiveRecord::Schema.define(version: 2023_05_03_013302) do
     t.text "summary"
     t.string "author"
     t.string "publish_date"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_books_on_user_id"
   end
 
   create_table "connections", force: :cascade do |t|
@@ -56,7 +54,6 @@ ActiveRecord::Schema.define(version: 2023_05_03_013302) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "books", "users"
   add_foreign_key "connections", "users"
   add_foreign_key "favorites", "books"
   add_foreign_key "favorites", "users"
