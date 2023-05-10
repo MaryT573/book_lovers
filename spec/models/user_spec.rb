@@ -46,6 +46,7 @@ RSpec.describe User, type: :model do
       it 'filters users by favorites' do
 
         expect(user1.matches).to eq([user4, user5])
+        expect(user1.matches).to_not include([user1, user2, user3])
       end
     end
   end
