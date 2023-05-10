@@ -19,4 +19,35 @@ RSpec.describe User, type: :model do
     #it { should validate_presence_of :password_digest }
     it { should have_secure_password }
   end
+
+  describe 'model methods' do
+    let!(:users) { create_list(:user, 5) }
+    let!(:user1) { users.first }
+    let!(:user2) { users.second }
+    let!(:user3) { users.third }
+    let!(:user4) { users.fourth }
+    let!(:user5) { users.fifth }
+    let!(:books) { create_list(:book, 10) }
+    let!(:u1fav1) { Favorite.create!(user_id: user1.id, book_id: books.first.id) }
+    let!(:u1fav2) { Favorite.create!(user_id: user1.id, book_id: books.second.id) }
+    let!(:u1fav3) { Favorite.create!(user_id: user1.id, book_id: books.third.id) }
+    let!(:u2fav1) { Favorite.create!(user_id: user2.id, book_id: books.fourth.id) }
+    let!(:u2fav2) { Favorite.create!(user_id: user2.id, book_id: books.fifth.id) }
+    let!(:u2fav3) { Favorite.create!(user_id: user2.id, book_id: books[5].id) }
+    let!(:u3fav1) { Favorite.create!(user_id: user3.id, book_id: books[6].id) }
+    let!(:u3fav2) { Favorite.create!(user_id: user3.id, book_id: books[7].id) }
+    let!(:u3fav3) { Favorite.create!(user_id: user3.id, book_id: books[8].id) }
+    let!(:u4fav1) { Favorite.create!(user_id: user4.id, book_id: books.first.id) }
+    let!(:u4fav2) { Favorite.create!(user_id: user4.id, book_id: books.fourth.id) }
+    let!(:u4fav3) { Favorite.create!(user_id: user4.id, book_id: books[9].id) }
+    let!(:u5fav1) { Favorite.create!(user_id: user5.id, book_id: books.second.id) }
+    let!(:u5fav2) { Favorite.create!(user_id: user5.id, book_id: books[9].id) }
+    describe '.matches' do
+      it 'filters users by favorites' do
+
+        expect(user1.matches).to eq([user4, user5])
+        expect(user1.matches).to_not include([user1, user2, user3])
+      end
+    end
+  end
 end
