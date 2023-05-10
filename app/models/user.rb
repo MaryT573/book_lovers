@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   def matches
     result = []
-    self.favorites.map do |favorite|
+    self.favorites.each do |favorite|
       result << favorite.book.users.where.not(id: self)
     end
     result.flatten

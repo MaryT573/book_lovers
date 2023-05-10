@@ -42,8 +42,9 @@ RSpec.describe User, type: :model do
     let!(:u4fav3) { Favorite.create!(user_id: user4.id, book_id: books[9].id) }
     let!(:u5fav1) { Favorite.create!(user_id: user5.id, book_id: books.second.id) }
     let!(:u5fav2) { Favorite.create!(user_id: user5.id, book_id: books[9].id) }
+
     describe '.matches' do
-      it 'filters users by favorites' do
+      it 'finds other users with same favorites' do
 
         expect(user1.matches).to eq([user4, user5])
         expect(user1.matches).to_not include([user1, user2, user3])
