@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :gender, 'Gender: ' %>
-    <%= form.select :gender, options_for_select([male, female, nonbinary]) %>
+    <%= form.select :gender, options_for_select(%w[male female nonbinary]) %>
   </div>
 
   <div class="field">
@@ -42,8 +42,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, 'Password Confirmation: ' %>
-    <%= f.password_field :password_confirmation, placeholder: 're-enter password', required: true %>
+    <%= form.label :password_confirmation, 'Password Confirmation: ' %>
+    <%= form.password_field :password_confirmation, placeholder: 're-enter password', required: true %>
   </div>
 
   <div class="actions">
